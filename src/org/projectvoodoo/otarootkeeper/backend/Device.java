@@ -118,7 +118,16 @@ public class Device {
 
     public void analyzeSu() {
         isRooted = detectValidSuBinaryInPath();
-        isSuperuserAppInstalled = isSuperUserApkinstalled();
+        isSuperuserAppInstalled = isChainsDD_SuperUserApkinstalled();
+        
+        if (isSuperuserAppInstalled == false) {
+        	isSuperuserAppInstalled = isChainfire_SuperSUApkinstalled();
+        }
+        
+        if (isSuperuserAppInstalled == false) {
+        	isSuperuserAppInstalled = isKoush_SuperUserApkinstalled();
+        }
+        
         isSuProtected = isSuProtected();
     }
 
@@ -180,7 +189,7 @@ public class Device {
         return false;
     }
 
-    private Boolean isSuperUserApkinstalled() {
+    private Boolean isChainsDD_SuperUserApkinstalled() {
         try {
             mContext.getPackageManager().getPackageInfo("com.noshufou.android.su", 0);
             Log.d(TAG, "Superuser.apk installed");
@@ -190,4 +199,24 @@ public class Device {
         }
     }
 
+    private Boolean isChainfire_SuperSUApkinstalled() {
+        try {
+            mContext.getPackageManager().getPackageInfo("eu.chainfire.supersu", 0);
+            Log.d(TAG, "Superuser.apk installed");
+            return true;
+        } catch (NameNotFoundException e) {
+            return false;
+        }
+    }
+    
+    private Boolean isKoush_SuperUserApkinstalled() {
+        try {
+            mContext.getPackageManager().getPackageInfo("com.koushikdutta.superuser", 0);
+            Log.d(TAG, "Superuser.apk installed");
+            return true;
+        } catch (NameNotFoundException e) {
+            return false;
+        }
+    }
+    
 }
