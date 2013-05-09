@@ -11,7 +11,10 @@
 # generated GUI files
 *R.java
 
+lint.xml
+
 BuildConfig.java
 
 proguard/
 bin/
+.settings/
